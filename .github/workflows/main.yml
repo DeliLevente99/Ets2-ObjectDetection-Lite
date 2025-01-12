@@ -16,12 +16,12 @@ jobs:
       with:
         node-version: '14'
     - run: npm install
-      working-directory: C:/a/Ets2-ObjectDetection-Lite
+      working-directory: C:/
     - run: npm test
-      working-directory: C:/a/Ets2-ObjectDetection-Lite
+      working-directory: C:/
   auto-merge:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
