@@ -16,9 +16,9 @@ jobs:
       with:
         node-version: '14'
     - run: npm install
-      working-directory: Ets2-ObjectDetection-Lite/base
+      working-directory: Ets2-ObjectDetection-Lite/.github/workflows
     - run: npm test
-      working-directory: Ets2-ObjectDetection-Lite/base
+      working-directory: Ets2-ObjectDetection-Lite/.github/workflows
   auto-merge:
     needs: build
     runs-on: windows-latest
