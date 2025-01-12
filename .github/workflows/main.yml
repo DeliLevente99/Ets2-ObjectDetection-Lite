@@ -1,0 +1,49 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - run: npm install
+    - run: npm test
+
+  auto-merge:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: Ármin hozzáadott egy képet
+        branch: images
+        title: 'Automated code update'
+        body: 'This PR was created automatically by the CI workflow.'
+    - name: Merge Pull Request
+      uses: actions/github-script@v3
+      with:
+        script: |
+          const { data: pullRequests } = await github.pulls.list({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            head: 'auto-update'
+          });
+          if (pullRequests.length > 0) {
+            const pullRequest = pullRequests[0];
+            await github.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pullRequest.number,
+              merge_method: 'commit and merge'
+            });
+          }
