@@ -16,9 +16,9 @@ jobs:
       with:
         node-version: '14'
     - run: npm install
-      working-directory: C:/a
+      working-directory: Ets2-ObjectDetection-Lite/base
     - run: npm test
-      working-directory: C:/a
+      working-directory: Ets2-ObjectDetection-Lite/base
   auto-merge:
     needs: build
     runs-on: windows-latest
