@@ -16,9 +16,9 @@ jobs:
       with:
         node-version: '14'
     - run: npm install
-      working-directory: C:/
+      working-directory: C:/a
     - run: npm test
-      working-directory: C:/
+      working-directory: C:/a
   auto-merge:
     needs: build
     runs-on: windows-latest
